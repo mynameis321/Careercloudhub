@@ -8,7 +8,6 @@ import toast from 'react-hot-toast';
 import { WORK_STATUS } from '../utils/constants';
 import IconBtn from '../components/common/IconBtn';
 import { MdOutlineNavigateNext } from "react-icons/md";
-import {Applicants} from '../data/dummy';
 import { submitJobApplication } from '../services/operations/ApplicationsAPI';
 import { useNavigate, useParams } from 'react-router-dom';
 import { fetchJobDetails } from '../services/operations/JobAPI';
