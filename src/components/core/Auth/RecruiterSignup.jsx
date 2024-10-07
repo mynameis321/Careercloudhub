@@ -74,10 +74,9 @@ const RecruiterSignup = () => {
                 }
             }
     
-            name = response?.data?.legalName.split(" ").join("").toLowerCase();
+            name = name.split(" ").join("").toLowerCase();
             const legalName = response?.data?.legalName.split(" ").join("").toLowerCase();
-            const tradeName = response?.data?.legalName.split(" ").join("").toLowerCase();
-    
+            const tradeName = response?.data?.tradeName.split(" ").join("").toLowerCase();
             if(name !== legalName && name !== tradeName){
                 return {
                     success: false,
