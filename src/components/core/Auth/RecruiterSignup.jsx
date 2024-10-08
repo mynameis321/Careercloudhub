@@ -125,7 +125,7 @@ const RecruiterSignup = () => {
         
         // console.log(signupData);
 
-        dispatch(sendOTP(formData.email,navigate));
+        dispatch(sendOTP(formData?.email,navigate,formData?.gstNo));
 
         setFormData({
             accountType:ACCOUNT_TYPE.APPLICANT,

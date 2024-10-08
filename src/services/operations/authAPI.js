@@ -33,13 +33,14 @@ export function validatePassword(formData){
     return true;
 }
 
-export function sendOTP(email , navigate ){
+export function sendOTP(email,navigate,gstNo ){
     return async(dispatch)=>{
         dispatch(setLoading(true));
         try{
 
             const result = await apiConnector("POST",endpoints.SENDOTP_APT,{
                 email,
+                gstNo
             })
 
             if(!result?.data?.success)

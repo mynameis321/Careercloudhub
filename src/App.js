@@ -73,7 +73,7 @@ function App() {
   }
 
   useEffect(()=>{
-    console.log(tokenExpiry);
+    // console.log(tokenExpiry);
     if(tokenExpiry && tokenExpiry < Date.now()){
       dispatch(logout(navigate));
     }

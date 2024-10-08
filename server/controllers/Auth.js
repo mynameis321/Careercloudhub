@@ -12,8 +12,9 @@ require('dotenv').config();
 exports.sendOTP = async(req,res)=>{
     try{
         //fetch email from request
-        const { email } = req.body;
-
+        const { email, gstNo } = req.body;
+        
+        console.log("req");
         //check if already registered or not by checking in db
         const applicant = await Applicant.findOne({email}).select("-password");
 
@@ -23,12 +24,21 @@ exports.sendOTP = async(req,res)=>{
                 message:'Email Already Registered as Applicant'
             });
         }
+        
         const company = await Company.findOne({email}).select("-password");
 
         if(company){
             return res.status(401).json({
                 success:false,
                 message:'Email Already Registered as Recruiter'
+            });
+        }
+        const companyName = await Company.findOne({gstNo}).select("-password");
+        // console.log(companyName);
+        if(companyName){
+            return res.status(401).json({
+                success:false,
+                message:'GST No Already Exist'
             });
         }
 
