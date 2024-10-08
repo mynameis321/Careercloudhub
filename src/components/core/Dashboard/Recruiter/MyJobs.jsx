@@ -35,13 +35,13 @@ const MyJobs = () => {
     return (
     <div className='w-11/12 max-w-maxContent mx-auto'>
         <p className='p-2 my-4 text-4xl font-semibold'>My Jobs</p>
-        <div className='flex flex-wrap gap-x-8 items-center'>
+        <div className='flex flex-wrap gap-x-8 items-center justify-center'>
             {
                 jobs && jobs.length ? <>
-                    <div className='flex flex-wrap gap-x-8 items-center'>
+                    <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-4'>
                         {
                             jobs && jobs.map(jb => (
-                                <div key={jb?._id} className='min-w-[15rem] max-w-[25rem]'>
+                                <div key={jb?._id} className='min-w-[15rem] max-w-[20rem] w-full h-full'>
                                     <Job_card deleteJob={deleteJob} job={jb}/>
                                 </div>
                             ))

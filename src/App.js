@@ -31,6 +31,7 @@ import { ACCOUNT_TYPE } from "./utils/constants";
 import { EditJob } from "./components/core/Dashboard/Recruiter/EditJob";
 import { deleteAccount } from "./services/operations/SettingsAPI";
 import Spinner from "./components/common/Spinner";
+import CreateJob from "./components/core/Dashboard/Recruiter/CreateJob";
 
 function App() {
 
@@ -201,7 +202,7 @@ function App() {
                 />
                 <Route
                   path="/dashboard/recruiter/add-job"
-                  element={<AddJob/>}
+                  element={<CreateJob/>}
                 />
                 <Route
                   path="/dashboard/recruiter/edit-job/:jobId"

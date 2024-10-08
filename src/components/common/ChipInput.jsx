@@ -26,7 +26,7 @@ const ChipInput = ({label,edit,editData,name,type,placeholder,register,errors,se
     // console.log(tagList);
 
     const addTag = (e)=>{
-        if(e.key === "Enter" || e.key === ","){
+        if(e.key === "Enter"){
             e.preventDefault();
             
             const chip = e.target.value.trim();
@@ -63,7 +63,7 @@ const ChipInput = ({label,edit,editData,name,type,placeholder,register,errors,se
                         <div onClick={() => {
                             deleteTag(index);
                         }}>
-                            <IoClose className='text-richblack-5'/>
+                            <IoClose className='text-richblack-5 cursor-pointer'/>
                         </div>
                     </div>
                 ))

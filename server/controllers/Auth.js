@@ -14,7 +14,6 @@ exports.sendOTP = async(req,res)=>{
         //fetch email from request
         const { email, gstNo } = req.body;
         
-        console.log("req");
         //check if already registered or not by checking in db
         const applicant = await Applicant.findOne({email}).select("-password");
 
