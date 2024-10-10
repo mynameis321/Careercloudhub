@@ -13,7 +13,7 @@ export const Template = ({title,desc1,desc2,frame,formtype}) => {
   const { loading } = useSelector(state => state.auth);
 
   return (
-    <div>
+    <div className='w-full sm:w-11/12'>
       {
         loading ? (<Spinner/>)
         :(

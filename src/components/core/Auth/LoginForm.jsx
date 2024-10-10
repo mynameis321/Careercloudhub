@@ -55,7 +55,7 @@ export const LoginForm = () => {
     }
 
   return (
-    <form className='mt-4 w-full flex flex-col gap-16' onSubmit={submitHandler}>
+    <form className='mt-4 flex flex-col gap-16' onSubmit={submitHandler}>
         <div className='w-fit flex items-center bg-richblack-800 text-sm text-richblack-200 py-[0.1rem] px-1 rounded-3xl cursor-pointer select-none shadow-[0px_0.6px_0px_0px_#424854]'>
             <div onClick={setAccount}
             className={`py-2 px-5 rounded-2xl  transition-all duration-150
