@@ -9,7 +9,7 @@ import "swiper/css/free-mode";
 import "swiper/css/pagination";
 
 // Import required modules
-import { FreeMode, Pagination } from "swiper/modules";
+import { Autoplay, FreeMode, Pagination } from "swiper/modules";
 import { Link } from 'react-router-dom';
 
 export const JobSlider = ({jobs,height,slides}) => {
@@ -19,7 +19,11 @@ export const JobSlider = ({jobs,height,slides}) => {
       <Swiper
         slidesPerView={1}
           spaceBetween={20}
-          modules={[FreeMode,Pagination]}
+          modules={[Autoplay,FreeMode,Pagination]}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
           breakpoints={{
             640: {
               slidesPerView: 2,
@@ -28,7 +32,7 @@ export const JobSlider = ({jobs,height,slides}) => {
               slidesPerView: 3,
             },
           }}
-          // className="max-h-[30rem]"
+          className="grid sm:grid-cols-3"
       >
         {
           jobs.map((job)=>(
