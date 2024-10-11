@@ -72,7 +72,7 @@ exports.companyNewJobApplicantMail = (applicantName , companyName, jobRole, appl
             <div class="message">New Application</div>
             <div class="body">
                 <p>Dear ${companyName},</p>
-                <p>You have recieved new application for the jobe role <span class="highlight">"${jobRole}"</span> by <span class="highlight">"${applicantName}"</span></p>. 
+                <p>You have recieved new application for the job role <span class="highlight">"${jobRole}"</span> by <span class="highlight">"${applicantName}"</span></p>. 
 
                 <p>You can check the application at the link given below</p>
                 <a class="cta" href="${process.env.BASE_URL}/dashboard/recruiter/application/${applicationId}">View Application</a>
