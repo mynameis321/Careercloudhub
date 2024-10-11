@@ -74,11 +74,10 @@ function App() {
   }
 
   useEffect(()=>{
-    // console.log(tokenExpiry);
-    if(tokenExpiry && tokenExpiry < Date.now()){
+    if(tokenExpiry && Date.parse(tokenExpiry) < Date.now()){
       dispatch(logout(navigate));
     }
-  },[location.pathname.includes('dashboard'),location.pathname.includes('apply')]);
+  },[location.pathname]);
 
   return (
     <div className="w-screen min-h-screen bg-richblack-900 text-white font-inter">

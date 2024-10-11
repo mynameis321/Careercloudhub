@@ -77,9 +77,8 @@ const ApplicationCard = ({application,updateApplication,path}) => {
                 
                 {/* Description */}
                 {
-                    user?.accountType === ACCOUNT_TYPE.APPLICANT
-                    ? (<p className='text-richblack-25 font-bold underline'>{`${application?.company?.companyName}`}</p>)
-                    : (<p className='text-richblack-25'>
+                    user?.accountType === ACCOUNT_TYPE.RECRUITER &&
+                    (<p className='text-richblack-25'>
                         {application?.applicant?.description}
                         {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia repudiandae, aliquid error excepturi amet ad qui quas deserunt, tempora nulla eligendi numquam nemo hic at pariatur nisi dolor. Aperiam, laborum. */}
                     </p>)

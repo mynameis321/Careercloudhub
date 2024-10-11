@@ -12,6 +12,8 @@ import { submitJobApplication } from '../services/operations/ApplicationsAPI';
 import { useNavigate, useParams } from 'react-router-dom';
 import { fetchJobDetails } from '../services/operations/JobAPI';
 import { setJob } from '../slices/jobSlice';
+import Spinner from '../components/common/Spinner';
+
 export const ApplyJob = () => {
 
   const dispatch = useDispatch();
@@ -45,7 +47,6 @@ export const ApplyJob = () => {
     getJobDetails();
   },[jobId]);
 
-
   const submitHandler = async(data)=>{
     setLoading(true);
 
@@ -74,6 +75,9 @@ export const ApplyJob = () => {
     setLoading(false);
     // console.log("step: ",step);
   }
+
+  if(!job || loading)
+    return <Spinner/>
 
   return (
     <div className='w-11/12 h-auto px-6 py-8 mx-auto text-richblack-5 font-inter flex flex-col items-center'>

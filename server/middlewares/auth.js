@@ -19,7 +19,7 @@ exports.auth = (req,res,next) =>{
             
             //Verify token
             const decode = jwt.verify(token,process.env.JWT_SECRET);
-            console.log(decode);
+            // console.log(decode);
             
             //inserting the token data in req body so we can authorize the user further
             req.user = decode;

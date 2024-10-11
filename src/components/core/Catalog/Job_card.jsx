@@ -19,9 +19,9 @@ export const Job_card = ({job,deleteJob,path}) => {
           <div className='cursor-pointer flex flex-col gap-y-5 select-none border p-3 rounded-md h-full'>
             <div className='flex flex-col gap-y-2'>
               <p className='text-xl font-semibold'>{job && job?.role}</p>
-              <p className='text-richblack-200'>
+              {/* <p className='text-richblack-200'>
                 {job && `${job?.company?.companyName}`}
-              </p>
+              </p> */}
               <div className='flex gap-2 items-center tracking-wide'>
                 <p className='text-richblack-25'>{`${job?.workPreference?.workStatus}`}</p>
                 <p className='text-richblack-25'>{`${job?.workPreference?.employmentType}`}</p>
@@ -45,7 +45,7 @@ export const Job_card = ({job,deleteJob,path}) => {
                   location.pathname === '/dashboard/recruiter/my-jobs' && 
                   <div className='flex gap-x-3 items-center'>
                     <Link to={`/dashboard/recruiter/edit-job/${job?._id}`}>
-                      <button className='text-sm text-richblack-200 hover:text-caribbeangreen-200 duration-100'>
+                      <button className='text-sm text-richblack-200 hover:text-caribbeangreen-200 duration-100 p-1'>
                         Edit
                       </button>
                     </Link>
@@ -54,7 +54,7 @@ export const Job_card = ({job,deleteJob,path}) => {
                         e.preventDefault();
                         deleteJobById(job?._id)
                       }}
-                     className='text-sm text-richblack-200 hover:text-pink-300 duration-100'>
+                     className='text-sm text-richblack-200 hover:text-pink-300 duration-100 p-1'>
                       Delete
                     </button>
                   </div>
@@ -68,9 +68,9 @@ export const Job_card = ({job,deleteJob,path}) => {
         <div className='flex flex-col gap-y-5 select-none border p-3 rounded-md h-full'>
           <div className='flex flex-col gap-y-2'>
             <p className='text-lg'>{job && job?.role}</p>
-            <p className='text-richblack-200'>
+            {/* <p className='text-richblack-200'>
               {job && `${job?.company?.companyName}`}
-            </p>
+            </p> */}
             <div className='flex gap-3 items-center tracking-wide'>
               <p className='text-richblack-25'>{`Open for ${job?.workPreference?.workStatus}`}</p>
               <p className='text-richblack-25'>{`${job?.workPreference?.employmentType}`}</p>
@@ -94,7 +94,7 @@ export const Job_card = ({job,deleteJob,path}) => {
                 location.pathname === '/dashboard/recruiter/my-jobs' && 
                 <div className='flex gap-x-3 items-center'>
                   <Link to={`/dashboard/recruiter/edit-job/${job?._id}`}>
-                    <button className='text-sm text-richblack-200 hover:text-caribbeangreen-200 duration-100'>
+                    <button className='text-sm text-richblack-200 hover:text-caribbeangreen-200 duration-100 p-1'>
                       Edit
                     </button>
                   </Link>
@@ -103,7 +103,7 @@ export const Job_card = ({job,deleteJob,path}) => {
                       e.preventDefault();
                       deleteJobById(job?._id);
                     }}
-                    className='text-sm text-richblack-200 hover:text-pink-300 duration-100'>
+                    className='text-sm text-richblack-200 hover:text-pink-300 duration-100 p-1'>
                     Delete
                   </button>
                 </div>

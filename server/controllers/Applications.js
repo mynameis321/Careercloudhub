@@ -128,7 +128,7 @@ exports.createApplication = async(req,res)=>{
 
             applicantMailSendingResponse = await mailSender(
                 updatedApplicant?.email,
-                `Application at ${updatedCompany?.companyName}`,
+                `Application for ${updatedJob?.role}`,
                 applicantJobApplicationMail(
                     `${updatedApplicant?.firstName} ${updatedApplicant?.lastName}`,
                     updatedCompany?.companyName,
@@ -223,7 +223,7 @@ exports.getApplicationsByCompany = async(req,res)=>{
         
         //Check existing company
         const foundCompany = await Company.findById({_id:companyId})
-                .sort({createdAt:-1}).select("-password");
+                .select("-password");
         
                 if(!foundCompany){
             return res.status(404).json({
@@ -234,6 +234,7 @@ exports.getApplicationsByCompany = async(req,res)=>{
 
         //fetch Applications
         const companyApplications = await Application.find({company:foundCompany?._id})
+            .sort({createdAt:-1})
             .populate("applicant","-password")
             .populate("company","-password")
             .populate({
@@ -274,7 +275,7 @@ exports.getApplicationsByApplicant = async(req,res)=>{
         
         //Check existing company
         const foundApplicant = await Applicant.findById({_id:applicantId})
-            .sort({createdAt:-1}).select("-password");
+            .select("-password");
         
             if(!foundApplicant){
             return res.status(404).json({
@@ -285,6 +286,7 @@ exports.getApplicationsByApplicant = async(req,res)=>{
 
         //fetch Applications
         const applicantApplications = await Application.find({applicant: foundApplicant?._id})
+            .sort({createdAt:-1})
             .populate("applicant","-password")
             .populate("company","-password")
             .populate({
@@ -369,7 +371,7 @@ const applicantStatusUpdatedMail = async(application)=>{
 
             statusUpdatedMailSendingResponse = await mailSender(
                 application?.applicant?.email,
-                `Application Update at ${application?.company?.companyName}`,
+                `Application Update for ${application?.job?.role}`,
                 applicationStatusUpdateMail(
                     `${application?.applicant?.firstName} ${application?.applicant?.lastName}`,
                     application?.company?.companyName,
@@ -447,7 +449,7 @@ exports.updateApplicationStatus = async(req,res)=>{
             if(!mailResponse){
                 return res.status(400).json({
                     success: false,
-                    message: "Status mail sent successfully"
+                    message: "Could not send status update mail"
                 });
             }
         }

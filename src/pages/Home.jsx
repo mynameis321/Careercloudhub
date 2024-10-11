@@ -81,7 +81,7 @@ export const Home = () => {
             </div>
 
             {/* Type animation CodeBlocks - 2 */}
-            <div className='w-full my-16'>
+            {/* <div className='w-full my-16'>
                 <CodeBlocks
                     position={"flex-row-reverse "}
                     heading={<div className='font-bold font-inter text-4xl w-full'>
@@ -103,7 +103,7 @@ export const Home = () => {
                     code={`<<!DOCTYPE html>\n<html>\nhead><title>Example</title>\n<linkrel="stylesheet"href="styles.css">\n/head>\nbody>\nh1><ahref="/">Header</a>\n/h1>\nnav><ahref="one/">One</a><ahref="two/">Two</a><ahref="three/">Three</a>\n/nav>`}
                     codeColor={"text-yellow-100"}
                 />
-            </div>
+            </div> */}
 
             {/* Card block */}
             {/* <ExploreMore/> */}

@@ -21,27 +21,27 @@ const RecruiterProfile = () => {
           {/* Details */}
           <div className='flex flex-col gap-5 max-w-[500px] text-[15px]'>
 
-            <div className=' w-full flex max-xxxs:flex-col gap-4 xxxs:items-center justify-between'>
+            <div className=' w-full flex max-xxs:flex-col gap-4 xxs:items-center justify-between'>
               
               <label className='flex flex-col gap-2 xxxs:w-[30%]'>
-                <p className='text-sm text-richblack-600'>Company Name</p>
+                <p className='text-sm text-richblack-500'>Company Name</p>
                 <p>{user?.companyName}</p>
               </label>
               
               <label className='flex flex-col gap-2 xxxs:w-[30%]'>
-                <p className='text-sm text-richblack-600'>Company GST No</p>
+                <p className='text-sm text-richblack-500'>Company GST No</p>
                 <p>{user?.gstNo}</p>
               </label>
             </div>
            
             <div className=' w-full flex max-xmd:flex-col gap-4 xmd:items-center justify-between'>
               <label className='flex flex-col gap-2 xmd:w-[30%]'>
-                <p className='text-sm text-richblack-600'>Company Email</p>
+                <p className='text-sm text-richblack-500'>Company Email</p>
                 <p>{user?.email}</p>
               </label>
               
               <label className='flex flex-col gap-2 xmd:w-[30%]'>
-                <p className='text-sm text-richblack-600'>Company Contact</p>
+                <p className='text-sm text-richblack-500'>Company Contact</p>
                 <p>
                   {
                     user && user?.mobile
@@ -54,7 +54,7 @@ const RecruiterProfile = () => {
             
             <div className='w-full flex max-xmd:flex-col gap-4 xmd:items-center justify-between'>
               <label className='flex flex-col gap-2 xmd:w-[30%]'>
-                <p className='text-sm text-richblack-600'>POC Designation</p>
+                <p className='text-sm text-richblack-500'>POC Designation</p>
                 <p>
                   {
                     user && user?.pocDesignation 
@@ -65,7 +65,7 @@ const RecruiterProfile = () => {
               </label>
               
               <label className='flex flex-col gap-2 xmd:w-[30%]'>
-                <p className='text-sm text-richblack-600'>POC</p>
+                <p className='text-sm text-richblack-500'>POC</p>
                 <p>
                   {
                     user && user?.poc
@@ -78,7 +78,7 @@ const RecruiterProfile = () => {
 
             <div className='w-full flex max-xmd:flex-col gap-4 xmd:items-center justify-between'>
               <label className='flex flex-col gap-2 w-full'>
-                <p className='text-sm text-richblack-600'>Address</p>
+                <p className='text-sm text-richblack-500'>Address</p>
                 <p>
                   {
                     user && user?.address 

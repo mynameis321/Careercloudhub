@@ -43,7 +43,7 @@ export const AddJob = () => {
     getCategories();
     
     if(editJob){
-      // console.log("edit: ",editCourse,course);
+      // console.log("edit: ",job);
       setValue("role",job?.role);
       setValue("summary",job?.summary);
       setValue("category",job?.category?._id);

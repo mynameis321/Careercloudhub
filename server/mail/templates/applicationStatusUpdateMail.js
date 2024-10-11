@@ -72,7 +72,7 @@ exports.applicationStatusUpdateMail = (applicantName, companyName, jobRole, stat
             <div class="message">Application Update</div>
             <div class="body">
                 <p>Dear ${applicantName},</p>
-                <p>Your have been ${status} for the jobe role <span class="highlight">"${jobRole}"</span> at <span class="highlight">"${companyName}"</span></p>. 
+                <p>Your have been ${status} for the jobe role <span class="highlight">"${jobRole}"</span>. 
                     
                 <p>You can check the application status at the link given below</p>
                 <a class="cta" href="${process.env.BASE_URL}/dashboard/applicant/my-applications">View Application</a>

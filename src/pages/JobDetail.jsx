@@ -189,12 +189,12 @@ export const JobDetail = () => {
                         
                             {/* Short Company Details */}
                             <div className='flex flex-col gap-y-2'>
-                                <p className='text-richblack-300 text-lg'>
+                                {/* <p className='text-richblack-300 text-lg'>
                                     {jobData?.company?.companyName}
-                                </p>
-                                <p className='text-richblack-300 text-lg'>
+                                </p> */}
+                                {/* <p className='text-richblack-300 text-lg'>
                                     {jobData?.company?.address}
-                                </p>
+                                </p> */}
                                 <div className='flex gap-x-2 items-center text-richblack-300 text-lg'>
                                     <LuAlertCircle />
                                     <span> Posted on</span>

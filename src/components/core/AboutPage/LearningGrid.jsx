@@ -32,7 +32,7 @@ const LearningGridArray = [
     },
     {
       order: 4,
-      heading: `Streamlined Application Process for Faster Results"`,
+      heading: `Streamlined Application Process for Faster Results`,
       description:
         "Experience a simplified application process designed to speed job search, apply to multiple positions quickly and efficiently.",
     },
