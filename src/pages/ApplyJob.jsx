@@ -91,12 +91,12 @@ export const ApplyJob = () => {
           {/* Education */}
           <div className='flex flex-col w-full'>
             <label htmlFor='education'>
-              <p>Highest Qualifiction <sup>*</sup> </p>
+              <p>Highest Qualification <sup>*</sup> </p>
             </label>
             <input
               className='outline-none mt-2 text-richblack-200 w-full p-2 py-2 bg-richblack-700 rounded-lg text-[16px] shadow-[0px_0.8px_0px_0px_#585D69]'
               name='education'
-              placeholder='Enter Qualifiction'
+              placeholder='Enter Qualification'
               type='text'
               {...register("education",{
                 required:{

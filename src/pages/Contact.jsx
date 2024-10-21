@@ -19,7 +19,7 @@ export const Contact = () => {
                             <HiChatBubbleLeftRight/>
                         </div>
                         <div className='text-md text-richblack-200'>
-                            <p className='text-richblack-5 font-bold text-lg'>Chat on us</p>
+                            <p className='text-richblack-5 font-bold text-lg'>Chat with us</p>
                             <p>Our friendly team is here to help.</p>
                         </div>
                     </div>
@@ -30,7 +30,7 @@ export const Contact = () => {
                         </div>
                         <div className='text-md text-richblack-200'>
                             <p className='text-richblack-5 font-bold text-lg'>Visit us</p>
-                            <p>Come and expore at our platform.</p>
+                            <p>Come and explore our platform.</p>
                         </div>
                     </div>
         
@@ -41,7 +41,7 @@ export const Contact = () => {
                         <div className='text-md text-richblack-200'>
                             <p className='text-richblack-5 font-bold text-lg'>Call us</p>
                             <p>Mon - Fri From 10am to 4pm</p>
-                            <p>9773773629</p>
+                            <p>+91 9773773629</p>
                         </div>
                     </div>
                 </div>
@@ -49,7 +49,7 @@ export const Contact = () => {
                 {/* form */}
                 <div className='flex flex-col justify-center gap-2 max-w-[550px] md:p-6 md:border border-richblack-600 md:scale-95'>
                     <p className='text-4xl text-richblack-5 font-bold'>Got skills? We've got the jobs.</p>
-                    <p className='text-lg text-richblack-200 font-bold'>Tall us more about yourself and what you're got in mind.</p>
+                    <p className='text-lg text-richblack-200 font-bold'>Tell us more about yourself and what you've got in mind.</p>
                     <div className='my-4'>
                         <ContactUsForm/>
                     </div>

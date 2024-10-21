@@ -139,9 +139,9 @@ const RecruiterProfileForm = () => {
                 {/* Description */}
                 <label className='flex flex-col w-full'>
                     <p className='text-[16px]'>Description</p>
-                    <input
+                    <textarea
                         className='outline-none mt-2 text-richblack-200 w-full p-2 py-2 bg-richblack-700 rounded-lg text-[16px] shadow-[0px_0.8px_0px_0px_#585D69]'
-                        type='text'
+                        rows={5}
                         name='description'
                         placeholder='Enter something about yourself'
                         {...register("description",{

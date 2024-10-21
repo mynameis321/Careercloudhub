@@ -101,7 +101,7 @@ export const Catalog = () => {
                 {/* Selected Category Jobs */}
                 <div>
                     <p className='text-3xl font-bold my-2'>
-                        Get Started with your Employement Journey
+                        Get Started with your Employment Journey
                     </p>
 
                     {

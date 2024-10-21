@@ -135,7 +135,7 @@ const ApplicantSignup = () => {
                     changeHandler={changeHandler}
                     showPasswordHandler={showPasswordHandler}
                 />
-                <span className={`absolute bottom-[15%] text-richblack-200 text-[20px] right-[5%] left-[85%]`}
+                <span className={`absolute bottom-[15%] text-richblack-200 text-[20px] right-[5%] left-[85%] cursor-pointer`}
                         onClick={()=>{showPasswordHandler("create",showPassword.create)}}>
                         {showPassword.create === true
                             ?<AiOutlineEyeInvisible />
@@ -154,7 +154,7 @@ const ApplicantSignup = () => {
                     changeHandler={changeHandler}
                     showPasswordHandler={showPasswordHandler}
                 />
-                <span className='absolute left-[85%] bottom-[15%] text-richblack-200 text-[20px]' onClick={()=>{showPasswordHandler("confirmPassword",showPassword.confirmPassword)}}>
+                <span className='absolute left-[85%] bottom-[15%] text-richblack-200 text-[20px] cursor-pointer' onClick={()=>{showPasswordHandler("confirmPassword",showPassword.confirmPassword)}}>
                     {
                         showPassword.confirmPassword === true
                         ?<AiOutlineEyeInvisible/>

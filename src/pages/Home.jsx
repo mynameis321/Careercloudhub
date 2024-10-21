@@ -25,7 +25,7 @@ export const Home = () => {
                 </button>
             </Link>
             <div className='mt-8 md:mx-6 md:text-center text-4xl font-bold'>
-                Fasten Your Employement Journey with <HighlightText text={"CareerCloudHub"}/> 
+                Fasten Your Employment Journey with <HighlightText text={"CareerCloudHub"}/> 
             </div>
             <div className='mt-4 md:max-4 md:text-center text-lg text-richblack-300 font-bold md:w-[90%]'>
             With our trusted recruiters find the best career opportunities with us. 
@@ -60,10 +60,10 @@ export const Home = () => {
                 <CodeBlocks
                     position={"flex-row "}
                     heading={<div className='font-bold font-inter text-4xl'>
-                        Hire your <HighlightText text={"potential employees"}/> with us.
+                        Find your <HighlightText text={"perfect employees"}/> with us.
                     </div>}
                     subheading={<div className='text-richblack-300 font-bold text-lg md:w-[80%]'>
-                        Our platform design for you to get amazing potential team.
+                        Hire top talent easily and efficiently.
                     </div>}
                     ctabtn1={{
                         btntext : "Hire Now",
@@ -75,7 +75,14 @@ export const Home = () => {
                         toLink:"/login",
                         active: false
                     }}
-                    code={`<<!DOCTYPE html>\n<html>\nhead><title>Example</title>\n<linkrel="stylesheet"href="styles.css">\n/head>\nbody>\nh1><ahref="/">Header</a>\n/h1>\nnav><ahref="one/">One</a><ahref="two/">Two</a><ahref="three/">Three</a>\n/nav>`}
+                    code={`Looking to build a top-notch team? 
+                        
+
+                        -> Our platform connects you with talented professionals who align with your company's goals. 
+                        
+                        -> Easily search, interview, and hire the perfect candidates. 
+                        
+                        -> Streamline your recruitment process & find the ideal fit for your team today.`}
                     codeColor={"text-yellow-100"}
                 />
             </div>
@@ -141,7 +148,7 @@ export const Home = () => {
                         <HighlightText text={' that fits you'}/>
                     </p>
                     <div className='flex flex-col justify-between gap-7 lg:w-[45%]'>
-                        <p className='font-semibold text-lg'>The modern CareerCloudHub dictates its own terms. Today, we are modernizing the user experience for Employement Journey.</p>
+                        <p className='font-semibold text-lg'>The modern CareerCloudHub dictates its own terms. Today, we are modernizing the user experience for Employment Journey.</p>
                         <CTAButton
                             active={true}
                             toLink={'/signup'}>

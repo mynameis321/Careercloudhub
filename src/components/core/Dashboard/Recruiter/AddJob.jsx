@@ -308,7 +308,7 @@ export const AddJob = () => {
             {/* Employement Type*/}
             <div className='flex flex-col flex-grow'>
               <label htmlFor="employmentType">
-                  <p className='text-[16px]'>Employement Type<sup>*</sup> </p>
+                  <p className='text-[16px]'>Employment Type<sup>*</sup> </p>
                   <select
                           {...register("employmentType",{
                           required:{

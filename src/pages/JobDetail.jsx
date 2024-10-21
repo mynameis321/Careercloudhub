@@ -293,7 +293,7 @@ export const JobDetail = () => {
                                     jobData && jobData?.responsibilities?.map((str,index)=>(
                                         <p 
                                             key={index}
-                                            className='flex gap-x-3 text-richblack-50 items-start'
+                                            className='flex gap-x-3 text-richblack-50 items-center'
                                         >
                                             <span>{<MdPlayArrow />}</span>
                                             <span>{str}</span>
@@ -311,7 +311,7 @@ export const JobDetail = () => {
                                     jobData && jobData?.requirements?.map((str,index)=>(
                                         <p 
                                             key={index}
-                                            className='flex gap-x-3 text-richblack-50 items-start'
+                                            className='flex gap-x-3 text-richblack-50 items-center'
                                         >
                                             <span>{<MdPlayArrow />}</span>
                                             <span>{str}</span>
@@ -329,7 +329,7 @@ export const JobDetail = () => {
                                     jobData && jobData?.preferredQualifications?.map((str,index)=>(
                                         <p 
                                             key={index}
-                                            className='flex gap-x-3 text-richblack-50 items-start'
+                                            className='flex gap-x-3 text-richblack-50 items-center'
                                         >
                                             <span>{<MdPlayArrow />}</span>
                                             <span>{str}</span>
@@ -366,7 +366,7 @@ export const JobDetail = () => {
                                     jobData?.benifits?.map((str,index) =>(
                                         <p 
                                             key={index}
-                                            className='flex gap-x-3 text-richblack-50 items-start'
+                                            className='flex gap-x-3 text-richblack-50 items-center'
                                         >
                                             <span>{<MdPlayArrow />}</span>
                                             <span>{str}</span>
@@ -385,7 +385,7 @@ export const JobDetail = () => {
                                     jobData?.policies?.map?.((str,index) =>(
                                         <p 
                                             key={index}
-                                            className='flex gap-x-3 text-richblack-50 items-start'
+                                            className='flex gap-x-3 text-richblack-50 items-center'
                                         >
                                             <span>{<MdPlayArrow />}</span>
                                             <span>{str}</span>

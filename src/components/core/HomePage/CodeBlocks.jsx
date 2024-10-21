@@ -43,7 +43,7 @@ export const CodeBlocks = ({position,heading,subheading,ctabtn1,ctabtn2,code,cod
             </div>
             <div className={`w-full font-mono font-bold ${codeColor}`}>
                 <TypeAnimation
-                    sequence={[code,4000,""]}
+                    sequence={[code,3000,""]}
                     cursor = {true}
                     omitDeletionAnimation={true}
                     repeat={Infinity}

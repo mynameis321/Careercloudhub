@@ -91,7 +91,7 @@ export const LoginForm = () => {
                     showPassword={showPassword}
                     showPasswordHandler={showPasswordHandler}
                 />
-                <span className={`absolute bottom-[15%] text-richblack-200 text-[20px] right-[5%]`}
+                <span className={`absolute bottom-[15%] text-richblack-200 text-[20px] right-[5%] cursor-pointer`}
                         onClick={()=>{showPasswordHandler("create",showPassword.create)}}>
                         {showPassword.create === true
                             ?<AiOutlineEyeInvisible />

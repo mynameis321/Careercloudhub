@@ -115,7 +115,9 @@ export const ContactUsForm = () => {
               <select
                   className="outline-none w-full bg-richblack-800"
                   name="code"
-                  size={1}>
+                  size={1}
+                  defaultValue={'+91'}
+                  >
                   {
                       data.map((element,index)=>{
                           return <option key={index} value={element.code}>

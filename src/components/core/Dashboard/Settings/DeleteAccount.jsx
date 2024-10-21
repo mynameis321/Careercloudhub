@@ -24,7 +24,7 @@ const DeleteAccount = ({deleteAccountModal}) => {
                     Would you like to delete account?
                 </p>
                 <p className='leading-normal'>
-                    This account contains Paid Courses. Deleting your account will remove all the contain associated with it.
+                    Deleting your account will remove all the content associated with it.
                 </p>
             </div>
             <button
