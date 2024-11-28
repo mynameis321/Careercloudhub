@@ -41,5 +41,47 @@ export const sidebarLinks = [
     path: "/dashboard/recruiter/applications-received",
     type: ACCOUNT_TYPE.RECRUITER,
     icon: "VscMortarBoard",
+  },
+  {
+    id: 8,
+    name: "My Profile",
+    path: "/dashboard/admin/profile",
+    type: ACCOUNT_TYPE.ADMIN,
+    icon: "VscAccount",
+  },
+  {
+    id: 9,
+    name: "Create Admin",
+    path: "/dashboard/admin/create-admin",
+    type: ACCOUNT_TYPE.ADMIN,
+    icon: "VscAdd",
+  },
+  {
+    id: 10,
+    name: "Add Category",
+    path: "/dashboard/admin/create-category",
+    type: ACCOUNT_TYPE.ADMIN,
+    icon: "VscAdd",
+  },
+  {
+    id: 11,
+    name: "Categories",
+    path: "/dashboard/admin/categories",
+    type: ACCOUNT_TYPE.ADMIN,
+    icon: "VscMortarBoard",
+  },
+  {
+    id: 12,
+    name: "Recruiters",
+    path: "/dashboard/admin/recruiters",
+    type: ACCOUNT_TYPE.ADMIN,
+    icon: "VscMortarBoard",
+  },
+  {
+    id: 13,
+    name: "Applicants",
+    path: "/dashboard/admin/applicants",
+    type: ACCOUNT_TYPE.ADMIN,
+    icon: "VscMortarBoard",
   }
 ];

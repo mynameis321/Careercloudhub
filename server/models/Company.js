@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const companySchema = new mongoose.Schema({
     approve:{
         type: Boolean,
-        default: true, //to be changed in future
+        default: false, //to be changed in future
         required: true
     },
     companyName:{

@@ -1,7 +1,56 @@
 const Applicant = require('../models/Applicant');
 const Company = require('../models/Company');
+const Admin = require('../models/Admin');
+const { ACCOUNT_TYPE } = require('../utils/constants');
 const { deteApplications } = require('./Applications');
 const { deleteJobS } = require('./Job');
+
+exports.disApproveAccount = async(req,res)=>{
+    try {
+        
+        const {userId: id,approve,accountType} = req.body;
+
+        if(!id || !accountType){
+            return res.status(404).json({
+                success: false,
+                message: "User details not found"
+            });
+        }
+
+        const User = accountType === ACCOUNT_TYPE.APPLICANT ? Applicant :
+                    (accountType === ACCOUNT_TYPE.RECRUITER ? Company : Admin);
+
+        const userDetails = await User.findById(id).select('-password');
+        if(!userDetails){
+            return res.status(404).json({
+                success: false,
+                message: "User not found"
+            });
+        }
+
+        const updatedUser = await User.findByIdAndUpdate(
+            {_id:id},
+            {
+                approve
+            },
+            {new: true}
+        ).select('-password');
+        // console.log(updatedUser);
+
+        res.status(200).json({
+            success: true,
+            message: `User ${approve ? "Unbanned" : "Banned"} Successfully`,
+            user: updatedUser
+        });
+
+    } catch (err) {
+        console.log("Could not change the account status",err);
+        return res.status(500).json({
+            success: false,
+            message: "Could not ban user. Please try again later"
+        });
+    }
+}
 
 exports.updateApplicantProfile = async(req,res)=>{
     try{
@@ -123,7 +172,7 @@ exports.deleteAccount = async(req,res) => {
         const {id:userId,accountType} = req.user;
         
         const User = accountType === "Applicant" ? Applicant 
-        :(accountType === "Company" ? Company : "") 
+        :(accountType === "Company" ? Company : Admin) 
 
         //get details
         const userDetails = await User.findById(userId)
@@ -132,7 +181,7 @@ exports.deleteAccount = async(req,res) => {
             await deteApplications(userDetails?.applications);
         }else{
             if(userDetails?.jobs)
-            await deleteJobS(userDetails?.jobs)
+                await deleteJobS(userDetails?.jobs)
         }
         
         //delete user
@@ -153,25 +202,86 @@ exports.deleteAccount = async(req,res) => {
 	}
 }        
 
-exports.getAllUserDetails = async (req, res) => {
-	// try {
-	// 	const id = req.user.id;
-	// 	const userDetails = await User.findById(id)
-	// 		.populate("additionalDetails")
-	// 		.exec();
-	// 	console.log("All Users",userDetails);
+exports.fetchAllRecruiters = async(req, res) => {
+    try {
+        
+        const companies = await Company.find({});
+        if(!companies){
+            return res.status(400).json({
+                success: false,
+                message: "Companies not found"
+            });
+        }
 
-	// 	res.status(200).json({
-	// 		success: true,
-	// 		message: "User Data fetched successfully",
-	// 		data: userDetails,
-	// 	});
-	// } catch (error) {
-	// 	return res.status(500).json({
-	// 		success: false,
-	// 		message: error.message,
-	// 	});
-	// }
+        return res.status(200).json({
+            success: true,
+            message: "Companies fetched successfully",
+            companies
+        });
+
+    } catch (err) {
+        console.log("Could not fetch companies",err);
+        res.status(500).json({
+            success: false,
+            message: "Something went wrong"
+        });
+    }
+}
+
+exports.fetchAllApplicants = async(req, res) => {
+    try {
+        
+        const applicants = await Applicant.find({});
+        if(!applicants){
+            return res.status(400).json({
+                success: false,
+                message: "Applicants not found"
+            });
+        }
+
+        return res.status(200).json({
+            success: true,
+            message: "Applicants fetched successfully",
+            applicants
+        });
+
+    } catch (err) {
+        console.log("Could not fetch applicants",err);
+        res.status(500).json({
+            success: false,
+            message: "Something went wrong"
+        });
+    }
+}
+
+exports.getCompleteRecruiterDetails = async (req, res) => {
+	try {
+		const { recruiterId } = req.body;
+
+        if(!recruiterId){
+            return res.status(401).json({
+                success: false,
+                message: "User Id not Found"
+            });
+        }
+
+		const userDetails = await Company.findById(recruiterId)
+			.populate("jobs")
+			.populate("applications")
+			.exec();
+		console.log("All Users",userDetails);
+
+		res.status(200).json({
+			success: true,
+			message: "User Data fetched successfully",
+			data: userDetails,
+		});
+	} catch (error) {
+		return res.status(500).json({
+			success: false,
+			message: error.message,
+		});
+	}
 };
 
 //update profile picture

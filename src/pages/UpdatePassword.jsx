@@ -8,6 +8,7 @@ import { InputField } from '../components/core/Auth/InputField';
 import { Link, useParams } from 'react-router-dom';
 import { resetPassword, validatePassword } from '../services/operations/authAPI';
 import Spinner from '../components/common/Spinner';
+import { ACCOUNT_TYPE } from '../utils/constants';
 
 export const UpdatePassword = () => {
     
@@ -156,14 +157,18 @@ export const UpdatePassword = () => {
                         {
                             emailSent && 
                             <button className='px-4 py-2 w-full rounded-lg mt-6 mb-4 text-richblack-900 font-bold bg-yellow-50'>
-                                <Link to={'/login'}>
+                                <Link to={`${ 
+                                    accountType !== ACCOUNT_TYPE.ADMIN ? '/login' : "/admin/login" 
+                                }`}>
                                     Return To Login
                                 </Link>
                             </button>
                         }
                     </form>
 
-                    <Link to={'/login'}>
+                    <Link to={`${ 
+                            accountType !== ACCOUNT_TYPE.ADMIN ? '/login' : "/admin/login" 
+                        }`}>
                         <div className='flex items-center gap-2 text-md'>
                             <BiLeftArrowAlt/>
                             <p>Back To Login</p>

@@ -1,11 +1,14 @@
 const Applicant = require('../models/Applicant');
 const Company = require('../models/Company');
+const Admin = require('../models/Admin');
 const OTP = require('../models/OTP');
 const otpGenerator = require('otp-generator');
+const generator = require('generate-password');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const mailSender = require('../utils/mailSender');
-const { passwordUpdated } = require('../mail/templates/passwordUpdate')
+const { passwordUpdated } = require('../mail/templates/passwordUpdate');
+const { adminCredentialMail } = require('../mail/templates/adminCredentialMail');
 require('dotenv').config();
 
 //sendOTP
@@ -13,6 +16,16 @@ exports.sendOTP = async(req,res)=>{
     try{
         //fetch email from request
         const { email, gstNo } = req.body;
+        
+        //check if already registered or not by checking in db
+        const admin = await Admin.findOne({email}).select("-password");
+
+        if(admin){
+            return res.status(401).json({
+                success:false,
+                message:'Email Already Registered as Admin'
+            });
+        }
         
         //check if already registered or not by checking in db
         const applicant = await Applicant.findOne({email}).select("-password");
@@ -245,6 +258,112 @@ exports.applicantSignUp = async(req,res) =>{
     }
 }
 
+exports.createAdmin = async(req,res) =>{
+    try{
+        //data fetch from body
+        const {
+            name,
+            email,
+            mobile,
+            accountType
+        } = req.body;
+
+        // console.log(req.body)
+
+        //validate data 
+        if(
+            !name ||
+            !email || 
+            !mobile ||
+            !accountType ){
+            return res.status(401).json({
+                success:false,
+                message:'Insufficient Information.'
+            });
+        }
+
+        //check if already registered or not by checking in db
+        const admin = await Admin.findOne({email}).select("-password");
+
+        if(admin){
+            return res.status(401).json({
+                success:false,
+                message:'Email Already Registered as Admin'
+            });
+        }
+        
+        //check if already registered or not by checking in db
+        const applicant = await Applicant.findOne({email}).select("-password");
+
+        if(applicant){
+            return res.status(401).json({
+                success:false,
+                message:'Email Already Registered as Applicant'
+            });
+        }
+        
+        const company = await Company.findOne({email}).select("-password");
+
+        if(company){
+            return res.status(401).json({
+                success:false,
+                message:'Email Already Registered as Recruiter'
+            });
+        }        
+
+        let password = generator.generate({
+            length: 8,
+            numbers: true,
+            symbols: true,
+            uppercase: true,
+            excludeSimilarCharacters: true,
+            strict: true,
+        
+        });
+
+        //hash password
+        const hashedPassword = await bcrypt.hash(password,10);
+
+        //create user                 
+        const newAdmin = await Admin.create({
+            name,
+            email,
+            mobile,
+            accountType,
+            password:hashedPassword,
+        });
+
+        if(newAdmin){
+            let mailResponse = null;
+            do{
+                mailResponse = await mailSender(
+                    email,
+                    "Account Created on CareerCloudHub",
+                    adminCredentialMail(name,email,password)
+                );
+                console.log("Email sent Successfully",mailResponse);
+            }while(!mailResponse);
+        }
+
+        newAdmin.password = undefined;
+        
+        //return response
+        return res.status(200).json({
+            success:true,
+            newAdmin,
+            message:"Admin created successfully"
+        });
+
+    }catch(err){
+        console.log("Could not create Admin");
+        console.log(err);
+        return res.status(500).json({
+            success: false,
+            message: "Admin cannot be created. Please try again later."
+        });
+    }
+}
+
 //Login
 exports.companyLogin = async(req,res)=>{
     try{
@@ -275,7 +394,7 @@ exports.companyLogin = async(req,res)=>{
                 email: user.email,
                 id: user._id,
                 accountType: user.accountType,
-                approve: user.approve
+                approved: user.approve
             }
 
             const token = jwt.sign(jwtPayload,process.env.JWT_SECRET,{
@@ -350,7 +469,8 @@ exports.applicantLogin = async(req,res)=>{
             let jwtPayload = {
                 email: user.email,
                 id: user._id,
-                accountType: user.accountType
+                accountType: user.accountType,
+                approved: user.approve
             }
 
             const token = jwt.sign(jwtPayload,process.env.JWT_SECRET,{
@@ -396,6 +516,83 @@ exports.applicantLogin = async(req,res)=>{
     }
 }
 
+//Login
+exports.adminLogin = async(req,res)=>{
+    try{
+        //fetch data from body
+        const {email,password} = req.body;
+        // console.log(password)
+
+        //validate data 
+        if(!email || !password){
+            return res.status(401).json({
+                success:false,
+                message:"Incomplete information. Enter all details."
+            });
+        }
+
+        //check if user registered or not
+        const user = await Admin.findOne({email});
+        if(!user){
+            return res.status(401).json({
+                success:false,
+                message:"Admin not found."
+            });
+        }
+
+        //compare passwords
+        if(await bcrypt.compare(password,user.password)){
+            //create token
+            let jwtPayload = {
+                email: user.email,
+                id: user._id,
+                accountType: user.accountType,
+                approved: user.approve
+            }
+
+            const token = jwt.sign(jwtPayload,process.env.JWT_SECRET,{
+                expiresIn: "9h"
+            });
+            
+            let tokenExpiry = new Date();
+            tokenExpiry.setHours(tokenExpiry.getHours() + 8,tokenExpiry.getMinutes() + 55);
+
+            //insert token
+            user.token = token;
+            user.tokenExpiry = tokenExpiry;
+            user.password = undefined;
+
+            //send cookies
+            const cookieOptions = {
+                expires: new Date(Date.now() + 9*60*60*1000),
+                httpOnly: true
+            }
+
+            res.cookie("token",token,tokenExpiry,cookieOptions).status(200).json({
+                success: true,
+                token,
+                tokenExpiry,
+                user,
+                message: "User Logged In Successfully"
+            });
+        }
+        else{
+            //if password incorrect
+            return res.status(401).json({
+                success:false,
+                message:"Incorrect Password"
+            });
+        }
+        
+    }catch(err){
+        console.log("Login Failed",err);
+        return res.status(500).json({
+            success: false,
+            message: "Failed to Login"
+        });
+    }
+}
+
 // changePassword
 exports.changePassword = async(req,res)=>{
     try{
@@ -413,7 +610,7 @@ exports.changePassword = async(req,res)=>{
             });
 
         const User = accountType === "Applicant" ? Applicant : (
-            accountType === "Company" ? Company : ""
+            accountType === "Company" ? Company : Admin
         );
 
         const userDetails = await User.findById(req.user.id);
@@ -444,7 +641,7 @@ exports.changePassword = async(req,res)=>{
 
         //send mail to user
         let name = (updatedUserDetails?.firstName + updatedUserDetails?.lastName) || 
-                    updatedUserDetails?.companyName;
+                    updatedUserDetails?.companyName || updatedUserDetails?.name;
        
         let emailResponse = null; 
         do{

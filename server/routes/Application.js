@@ -2,7 +2,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { auth, isRecruiter, isApplicant } = require("../middlewares/auth");
+const { auth, isRecruiter, isApplicant, isApproved } = require("../middlewares/auth");
 const { 
         getApplicationsByCompany, 
         getApplicationsByApplicant, 
@@ -10,10 +10,10 @@ const {
         updateApplicationStatus 
     } = require("../controllers/Applications");
 
-router.get('/recruiter/getApplications',auth,isRecruiter,getApplicationsByCompany);
-router.get('/applicant/getApplications',auth,isApplicant,getApplicationsByApplicant);
-router.post('/getApplicationDetails',auth,isRecruiter,getApplicationDetails);
-router.put('/updateApplicationStatus',auth,isRecruiter,updateApplicationStatus);
+router.get('/recruiter/getApplications',auth,isApproved,isRecruiter,getApplicationsByCompany);
+router.get('/applicant/getApplications',auth,isApproved,isApplicant,getApplicationsByApplicant);
+router.post('/getApplicationDetails',auth,isApproved,isRecruiter,getApplicationDetails);
+router.put('/updateApplicationStatus',auth,isApproved,isRecruiter,updateApplicationStatus);
 
 
 module.exports = router;

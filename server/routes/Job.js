@@ -7,13 +7,16 @@ const {
     auth,
     isApplicant,
     isRecruiter,
-    isAdmin
+    isAdmin,
+    isApproved
 } = require('../middlewares/auth');
 
 //catagory controller imports
 const {
     createCategory,
     showAllCategories,
+    editCategory,
+    getCategoryDetails,
 } = require('../controllers/Category');
 
 //Course controller imports 
@@ -36,7 +39,9 @@ const {
 // ********************************************************************************************************
 // Category can Only be Created by Admin
 // TODO: Put IsAdmin Middleware here
-router.post('/createCategory',auth,isRecruiter,createCategory);
+router.post('/createCategory',auth,isApproved,isAdmin,createCategory);
+router.post('/editCategory',auth,isApproved,isAdmin,editCategory);
+router.post('/getCategoryDetails',auth,isApproved,isAdmin,getCategoryDetails);
 router.get('/showAllCategories',showAllCategories);
 router.post('/getJobsByCategory',getCategoryPageJobs);
 
@@ -45,15 +50,15 @@ router.post('/getJobsByCategory',getCategoryPageJobs);
 // ********************************************************************************************************
 
 //Jobs can only be created by recruiters
-router.post('/createJob',auth,isRecruiter,createJob);
-router.get('/getJobsByCompany',auth,isRecruiter,getJobsByCompany);
+router.post('/createJob',auth,isApproved,isRecruiter,createJob);
+router.get('/getJobsByCompany',auth,isApproved,isRecruiter,getJobsByCompany);
 router.get('/getAllJobs',getAllJobs);
 
 //Get Details for a job
 router.post('/getJobDetails',getJobDetails);
-router.post('/applyJob',auth,isApplicant,createApplication);
-router.post('/editJob',auth,isRecruiter,editJob);
-router.post('/deleteJob',auth,isRecruiter,deleteJob);
+router.post('/applyJob',auth,isApproved,isApplicant,createApplication);
+router.post('/editJob',auth,isApproved,isRecruiter,editJob);
+router.post('/deleteJob',auth,isApproved,isRecruiter,deleteJob);
 
 
 module.exports = router;

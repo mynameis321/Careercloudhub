@@ -88,7 +88,11 @@ export function login(data, navigate){
     return async(dispatch)=>{
         dispatch(setLoading(true));
         try{
-            const API_PATH = data?.accountType === ACCOUNT_TYPE?.APPLICANT ? endpoints.APPLICANT_LOGIN_API : endpoints.RECRUITER_LOGIN_API;
+            const API_PATH = data?.accountType === ACCOUNT_TYPE?.APPLICANT 
+            ? endpoints.APPLICANT_LOGIN_API :
+            (data?.accountType === ACCOUNT_TYPE?.RECRUITER ? endpoints.RECRUITER_LOGIN_API
+                :endpoints.ADMIN_LOGIN_API);
+
             const response = await apiConnector("POST",API_PATH,data);
             
             if(!response?.data?.success)
@@ -112,6 +116,8 @@ export function login(data, navigate){
                 navigate('/dashboard/applicant/profile');
             else if(user?.accountType === ACCOUNT_TYPE.RECRUITER)
                 navigate('/dashboard/recruiter/profile');
+            else if(user?.accountType === ACCOUNT_TYPE.ADMIN)
+                navigate('/dashboard/admin/profile');
 
         }catch(err){
             // console.log("LOGIN API RESPONSE.....",err);
@@ -129,6 +135,7 @@ export function logout(navigate){
         // dispatch(resetCart());
         localStorage.removeItem("user");
         localStorage.removeItem("token");
+        localStorage.removeItem("tokenExpiry");
         toast.success("Logged Out");
         navigate("/");
     }

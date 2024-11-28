@@ -15,7 +15,7 @@ const UpdateProfileSection = () => {
         ? <ApplicantProfileForm/>
         :(
             user?.accountType === ACCOUNT_TYPE.RECRUITER
-            ? <RecruiterProfileForm/> : <p>Admin</p>
+            ? <RecruiterProfileForm/> : <></>
         )
        }
     </div>

@@ -25,11 +25,11 @@ exports.auth = (req,res,next) =>{
             req.user = decode;
 
         }catch(err){
-            console.log(err);
             console.log("Invalid Token");
+            console.log(err);
             return res.status(401).json({
                 success: false,
-                message: "Token Invalid"
+                message: "Session Expired. Login Again"
             });
         }
 
@@ -37,12 +37,36 @@ exports.auth = (req,res,next) =>{
         next();
 
     }catch(err){
-        console.log(err);
         console.log("Authentication Failed");
+        console.log(err);
         res.status(401).json({
             success: false,
             message: "Something went wrong. Authentication Failed"
         });
+    }
+}
+
+exports.isApproved = async(req,res,next)=>{
+    try{
+        //if not approved 
+        if(!req.user.approved){
+            return res.status(403).json({
+                success: false,
+                message: "Account not Approved Yet"
+            });
+        }
+        
+        //if authorized then next
+        next();
+
+    }catch(err){
+        console.log("Could not Approve account");
+        console.log(err);
+
+        res.status(500).json({
+            success: false,
+            message: "Account cannot be approved. Please try againg later."
+        });   
     }
 }
 
@@ -60,8 +84,8 @@ exports.isApplicant = async(req,res,next)=>{
         next();
 
     }catch(err){
-        console.log(err);
         console.log("Authorization Failed");
+        console.log(err);
         res.status(500).json({
             success: false,
             message: "User role cannot be verified. Please try again later"
@@ -83,8 +107,8 @@ exports.isRecruiter = async(req,res,next)=>{
         next();
 
     }catch(err){
-        console.log(err);
         console.log("Authorization Failed");
+        console.log(err);
         res.status(500).json({
             success: false,
             message: "User role cannot be verified. Please try again later"
@@ -106,8 +130,8 @@ exports.isAdmin = async(req,res,next)=>{
         next();
 
     }catch(err){
-        console.log(err);
         console.log("Authorization Failed");
+        console.log(err);
         res.status(500).json({
             success: false,
             message: "User role cannot be verified. Please try again later"

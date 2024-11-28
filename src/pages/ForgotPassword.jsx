@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { InputField } from '../components/core/Auth/InputField';
 import { getPasswordResetToken } from '../services/operations/authAPI';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { BiLeftArrowAlt } from 'react-icons/bi';
 
 export const ForgotPassword = () => {
@@ -11,6 +11,7 @@ export const ForgotPassword = () => {
     const [emailSent , setEmailSent] = useState(false);
     const [email, setEmail] = useState("");
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleOnSubmit = (e)=>{
        e.preventDefault();
@@ -60,12 +61,12 @@ export const ForgotPassword = () => {
                             }
                         </button>
                     </form>
-                    <Link to={'/login'}>
+                    <button onClick={()=>{navigate(-1)}}>
                         <div className='flex items-center gap-2 text-md'>
                             <BiLeftArrowAlt/>
                             <p>Back To Login</p>
                         </div>
-                    </Link>
+                    </button>
                 </div>)
             }
 

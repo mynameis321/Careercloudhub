@@ -32,6 +32,14 @@ import { EditJob } from "./components/core/Dashboard/Recruiter/EditJob";
 import { deleteAccount } from "./services/operations/SettingsAPI";
 import Spinner from "./components/common/Spinner";
 import CreateJob from "./components/core/Dashboard/Recruiter/CreateJob";
+import CreateCategory from "./components/core/Dashboard/Admin/CreateCategory";
+import { Categories } from "./components/core/Dashboard/Admin/Categories";
+import { Recruiters } from "./components/core/Dashboard/Admin/Recruiters";
+import { Applicants } from "./components/core/Dashboard/Admin/Applicants";
+import { CreateAdmin } from "./components/core/Dashboard/Admin/CreateAdmin";
+import AdminLogin from "./pages/AdminLogin";
+import AdminProfile from "./components/core/Dashboard/Admin/AdminProfile";
+import { EditCategory } from "./components/core/Dashboard/Admin/EditCategory";
 
 function App() {
 
@@ -116,6 +124,15 @@ function App() {
             }
           />
 
+          <Route
+            path="/admin/login"
+            element={
+              <OpenRoute>
+                <AdminLogin/>
+              </OpenRoute>
+            }
+          />
+          
           <Route
             path="login"
             element={
@@ -214,6 +231,49 @@ function App() {
                 <Route
                   path="/dashboard/recruiter/application/:applicationId"
                   element={<ApplicationDetail/>}
+                />
+              </>
+            }
+
+            {/* In Future will be admin Routes */}
+            {
+              user?.accountType === ACCOUNT_TYPE.ADMIN &&
+              <>
+                <Route
+                path="/dashboard/admin/profile"
+                element={<AdminProfile/>}
+                />
+                <Route
+                  path="/dashboard/admin/create-admin"
+                  element={<CreateAdmin/>}
+                />
+                <Route
+                  path="/dashboard/admin/create-category"
+                  element={<CreateCategory/>}
+                />
+                <Route
+                  path="/dashboard/admin/edit-category/:categoryId"
+                  element={<EditCategory/>}
+                />
+                <Route
+                  path="/dashboard/admin/categories"
+                  element={<Categories/>}
+                />
+                <Route
+                  path="/dashboard/admin/recruiters"
+                  element={<Recruiters/>}
+                />
+                <Route
+                  path="/dashboard/admin/recruiter/:companyId"
+                  // element={<Recruiters/>}
+                />
+                <Route
+                  path="/dashboard/admin/applicants"
+                  element={<Applicants/>}
+                />
+                <Route
+                  path="/dashboard/admin/applicant/:applicantId"
+                  // element={<Recruiters/>}
                 />
               </>
             }

@@ -23,6 +23,8 @@ function OpenRoute({ children }) {
       return <Navigate to="/dashboard/applicant/profile" />
     else if(user?.accountType === ACCOUNT_TYPE.RECRUITER)
       return <Navigate to="/dashboard/recruiter/profile" />
+    else if(user?.accountType === ACCOUNT_TYPE.ADMIN)
+      return <Navigate to="/dashboard/admin/profile" />
   }
 }
 

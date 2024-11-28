@@ -36,8 +36,10 @@ export const ProfileDropdown = () => {
         open && 
         <div ref={ref} className='bg-richblack-800 border-[.1px] border-richblack-700 absolute -bottom-[130%] text-[14px] text-richblack-100 right-0 z-[150] max-md:hidden rounded-md'>
           <Link to={`/dashboard/${
-            user?.accountType === ACCOUNT_TYPE.APPLICANT ? 'applicant' : 'recruiter'
-          }/profile`} onClick={()=>setOpen(false)}>
+                        user?.accountType === ACCOUNT_TYPE.APPLICANT ? 'applicant' 
+                        :(user?.accountType === ACCOUNT_TYPE.RECRUITER ? 'recruiter' : 'admin')
+                    }/profile`} 
+            onClick={()=>setOpen(false)}>
             <p className='flex items-center gap-x-1 p-4 py-3 border-b-[.1px] border-richblack-700'>
               <span><PiUserSwitchBold className='text-lg'/></span>
               <span>Dashboard</span>

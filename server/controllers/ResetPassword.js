@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 const Applicant = require('../models/Applicant');
 const Company = require('../models/Company');
+const Admin = require('../models/Admin');
 
 require('dotenv').config();
 
@@ -19,12 +20,16 @@ exports.resetPasswordToken = async(req,res)=>{
 		if (!userApplicant) {
             const userCompany = await Company.findOne({ email: email }).select("-password");
 			if(!userCompany){
-                return res.json({
-                    success: false,
-                    message: `${email} not registered`,
-                });
+                const userAdmin = await Admin.findOne({ email: email }).select("-password");
+                if(!userAdmin){
+                    return res.json({
+                        success: false,
+                        message: `${email} not registered`,
+                    });
+                }
+                else User = Admin;
             }
-            User = Company;
+            else User = Company;
 		}
         else User = Applicant;
         
@@ -40,6 +45,8 @@ exports.resetPasswordToken = async(req,res)=>{
             },
             {new: true}
         ).select("-password");
+
+        // console.log(updatedDetails);
 
         //createing the reset password frontend link 
         let url = `${process.env.BASE_URL}/update-password/${updatedDetails?.accountType}/${token}`;
@@ -91,7 +98,7 @@ exports.resetPassword = async(req,res)=>{
         }
 
         const User = accountType === "Applicant" ? Applicant : (
-            accountType === "Company" ? Company : ""
+            accountType === "Company" ? Company : Admin
         );
 
         // console.log(User);

@@ -64,8 +64,10 @@ export function updateProfile (token,data,accountType){
             toast.dismiss(toastId);
             // console.log("UPDATE USER PROFILE API RESPONSE....",response);
 
-            let userImage = response?.data?.updatedUserDetails?.image ||
-            `https://api.dicebear.com/5.x/initials/svg?seed=${response?.data?.updatedUserDetails?.firstName} ${response?.data?.updatedUserDetails?.lastName && ""}`;
+            const userName = response?.data?.updatedUserDetails?.name || response?.data?.updatedUserDetails?.companyName || response?.data?.updatedUserDetails?.firstName + " " + response?.data?.updatedUserDetails?.secondName
+            
+            let userImage = response?.data?.user?.image ||
+            `https://api.dicebear.com/5.x/initials/svg?seed=${userName}`;
 
             let user = {
                 ...response?.data?.updatedUserDetails,

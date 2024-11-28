@@ -4,6 +4,10 @@ import { categories } from "../apis";
 import toast from "react-hot-toast";
 
 const {
+    CREATE_CATEGORY_API
+} = categories
+
+const {
     CREATE_JOB_API,
     GET_ALL_JOBS_API,
     GET_CATEGORY_PAGE_JOBS_API,
@@ -26,9 +30,38 @@ export function fetchCategories(setCategories){
             // toast.success("Categories fetched successfully");
     
         }catch(err){
-            console.log("FETCH CATAGORIES API RESPONSE....",err);
+            // console.log("FETCH CATAGORIES API ERROR....",err);
             toast.error(err?.response?.data?.message || err?.message);
         }
+    }
+}
+
+export async function createCategory(formData,token,navigate){
+    const toastId = toast.loading("Creating Category");
+    try{
+            // console.log("here: , formData: ",formData);
+            const response = await apiConnector(
+                "POST",
+                CREATE_CATEGORY_API,
+                formData,
+                {
+                    Authorization:`Bearer ${token}`
+                }
+            );
+
+            if(!response?.data?.success)
+                throw new Error(response?.data?.message);
+            
+            toast.dismiss(toastId)
+            toast.success(response?.data?.message);
+            navigate('/dashboard/admin/categories');
+            // console.log("CREATE_CATEGORY_API_REPONSE....",response);
+            return response?.data?.data;
+    }catch(err){
+        // console.log("CREATE_CATEGORY_API_ERROR....",err);
+        toast.error(err?.response?.data?.message || err?.message);
+        toast.dismiss(toastId)
+        return null
     }
 }
 

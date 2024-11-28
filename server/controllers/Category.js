@@ -42,6 +42,84 @@ exports.createCategory = async(req,res) =>{
     }
 }
 
+exports.editCategory = async(req,res) =>{
+    try{
+        //fetch data and file
+        const updates = req.body;
+        const {categoryId} = req.body;
+
+        // console.log(req.body);
+        
+        //validate category
+        const categoryDetails = await Category.findById({_id:categoryId});
+        if(!categoryDetails){
+            return res.status(401).json({
+                success: false,
+                message: "Invalid Category"
+            });
+        }
+        
+
+        //inserting entry in db
+        const updatedCategory = await Category.findByIdAndUpdate(
+            {_id: categoryDetails?._id},
+            updates,
+            {new: true}
+        )
+        .exec();
+
+        // return response
+        return res.status(200).json({
+            success: true,
+            data: updatedCategory,
+            message: "Category updated Successfully"
+        });
+
+    }catch(err){
+        console.log("Could not update Category");
+        console.log(err);
+		res.status(500).json({
+			success: false,
+			message: "Something went wrong. Please try again later"
+		});
+    }
+}
+
+exports.getCategoryDetails = async(req,res)=>{
+    try {
+        const {categoryId} = req.body;
+
+        if(!categoryId){
+            return res.status(401).json({
+                success:false,
+                message:"Details not found"
+            });
+        }
+
+        const categoryDetails = await Category.findById(categoryId);
+        if(!categoryDetails){
+            return res.status(404).json({
+                success: false,
+                message: `Category not found`
+            })
+        }
+        // console.log(categoryDetails)
+
+        res.status(200).json({
+            success: true,
+            message: "Category details fetched successfully",
+            data: categoryDetails
+        })
+
+    } catch (err) {
+        console.log("Could not fetch category details",err);
+        res.status(500).json({
+            success: false,
+            message: "Something went wrong. Please try again later"
+        })
+    }
+}
+
 //get All categories
 exports.showAllCategories = async(req,res) =>{
     try{

@@ -164,38 +164,12 @@ const ApplicantProfileForm = () => {
                 </label>
             </div>
 
-            <div className='flex max-sm:flex-col gap-6'>
-               {/* Contact Number */}
-                <label className='flex flex-col w-full'>
-                    <p className='text-[16px]'>Contact Number</p>  
-                    
-                    <input
-                        className='outline-none mt-2 text-richblack-200 w-full p-2 py-2 bg-richblack-700 rounded-lg text-[16px] shadow-[0px_0.8px_0px_0px_#585D69]'
-
-                        type='tel'
-                        name='mobile'
-                        placeholder='Enter Contact Number'
-                        {...register("mobile",
-                        {
-                            required:{value:true,message:"Please Enter Your Contact Number"},
-                            maxLength:{value:10,message:"Invalid Contact Number"},
-                            minLength:{value:8,message:"Invalid Contact Number"}
-                        })}
-                        defaultValue={user?.mobile}
-                    />
-                    {
-                        errors.mobile &&
-                        <span className="text-[12px] text-yellow-100">
-                            {errors.mobile.message}
-                        </span>
-                    }
-                </label>
-                {/* Description */}
-                <label className='flex flex-col w-full'>
+{/* Description */}
+<label className='flex flex-col w-full'>
                     <p className='text-[16px]'>Summary</p>
                     <textarea
                         className='outline-none mt-2 text-richblack-200 w-full p-2 py-2 bg-richblack-700 rounded-lg text-[16px] shadow-[0px_0.8px_0px_0px_#585D69]'
-                        rows={5}
+                        rows={3}
                         name='description'
                         placeholder='Enter something about yourself'
                         {...register("description",{
@@ -218,6 +192,33 @@ const ApplicantProfileForm = () => {
                         errors.description &&
                         <span className=" text-[12px] text-yellow-100">
                             {errors.description?.message}
+                        </span>
+                    }
+                </label>
+
+            <div className='flex max-sm:flex-col gap-6'>
+               {/* Contact Number */}
+                <label className='flex flex-col'>
+                    <p className='text-[16px]'>Contact Number</p>  
+                    
+                    <input
+                        className='outline-none mt-2 text-richblack-200 w-full p-2 py-2 bg-richblack-700 rounded-lg text-[16px] shadow-[0px_0.8px_0px_0px_#585D69]'
+
+                        type='tel'
+                        name='mobile'
+                        placeholder='Enter Contact Number'
+                        {...register("mobile",
+                        {
+                            required:{value:true,message:"Please Enter Your Contact Number"},
+                            maxLength:{value:10,message:"Invalid Contact Number"},
+                            minLength:{value:8,message:"Invalid Contact Number"}
+                        })}
+                        defaultValue={user?.mobile}
+                    />
+                    {
+                        errors.mobile &&
+                        <span className="text-[12px] text-yellow-100">
+                            {errors.mobile.message}
                         </span>
                     }
                 </label>

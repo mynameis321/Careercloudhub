@@ -140,7 +140,8 @@ export const Navbar = ({setLoading,loading}) => {
                     token &&
                     <div className='md:hidden flex flex-col gap-y-2'>
                         <Link to={`/dashboard/${
-                                user?.accountType === ACCOUNT_TYPE.APPLICANT ? 'applicant' : 'recruiter'
+                                user?.accountType === ACCOUNT_TYPE.APPLICANT ? 'applicant' 
+                                :(user?.accountType === ACCOUNT_TYPE.RECRUITER ? 'recruiter' : 'admin')
                             }/profile`} onClick={()=>setActive(false)}>
                             <p className='p-4 py-2'>
                                 <span>Dashboard</span>

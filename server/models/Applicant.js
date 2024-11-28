@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
 
 const applicantSchema = new mongoose.Schema({
+    approve:{
+        type: Boolean,
+        default: true, //to be changed in future
+        required: true
+    },
     firstName:{
         type:String,
         required:true,
